@@ -33,8 +33,8 @@ from bpy.types import (Panel, Menu, Operator, PropertyGroup, )
 from cam import gcodeimportparser, simple
 from cam.simple import *
 
-from cam.ui_panels.info_panel import CAM_INFO_Panel
-from cam.ui_panels.buttons_panel import CAMButtonsPanel
+from cam.ui_panels.buttons_panel    import CAMButtonsPanel
+from cam.ui_panels.info_panel       import CAM_INFO_Panel
 
 
 # Displays percentage of the cutter which is engaged with the material

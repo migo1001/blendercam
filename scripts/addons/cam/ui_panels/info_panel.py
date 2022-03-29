@@ -6,8 +6,6 @@ import ocl
 from cam.simple import strInUnits
 from cam.ui_panels.buttons_panel import CAMButtonsPanel
 
-
-
 # Info panel
 # This panel gives general information about the current operation
 
@@ -31,16 +29,21 @@ class CAM_INFO_Panel(CAMButtonsPanel, bpy.types.Panel):
             self.layout.label(text='No CAM operation created')
 
     def draw_opencamlib_version(self):
+        opencamlib_text = None
         if "ocl" in sys.modules:
-            self.layout.label(text = "Opencamlib v%s installed" % ocl.version())
+            opencamlib_text = "Opencamlib v%s installed" % ocl.version()
         else:
-            self.layout.label(text = "Opencamlib is not installed")
+            opencamlib_text = "Opencamlib is not installed"
+        self.layout.label(text = opencamlib_text)
+        return(opencamlib_text)
 
     def draw_active_op_warnings(self):
-        active_op = self.scene.cam_operations[self.scene.cam_active_operation]
+        scene = bpy.context.scene
+        active_op = scene.cam_operations[scene.cam_active_operation]
         if active_op.warnings != '':
             for line in active_op.warnings.rstrip("\n").split("\n"):
                 self.layout.label(text=line, icon='ERROR')
+        return (active_op.warnings)
 
     def draw_active_op_data(self):
         active_op = self.scene.cam_operations[self.scene.cam_active_operation]
